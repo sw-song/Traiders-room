@@ -1,3 +1,3 @@
-# Zoo
+# Traiders-room 
 
-Zoom clone using NodeJS, WebRTC and Websockets
+Real-time video call and chat-based stock discussion room implemented with websocket
