@@ -1,3 +1,3 @@
 # Traiders-room 
 
-Real-time video call and chat-based stock discussion room implemented with websocket
+Real-time video chat for stock discussion implemented with websocket
