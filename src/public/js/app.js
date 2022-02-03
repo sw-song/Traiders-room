@@ -1,4 +1,19 @@
-/* connection to server */
+const socket = io();
+
+const welcome = document.getElementById("welcome")
+const form = welcome.querySelector("form");
+
+function handleRoomSubmit(event){
+    event.preventDefault();
+    const input = form.querySelector("input");
+    socket.emit("enter_room", { payload: input.value}, (msg) => {
+        console.log(`throwing message from the server! : `, msg);
+    });
+    input.value = "";
+}
+form.addEventListener("submit", handleRoomSubmit);
+
+/* 
 const messageList = document.querySelector("ul");
 const nickForm = document.querySelector("#nickname");
 const messageForm = document.querySelector("#message");
@@ -43,3 +58,4 @@ function handleNickSubmit(event) {
 
 messageForm.addEventListener("submit", handleSubmit);
 nickForm.addEventListener("submit", handleNickSubmit);
+*/

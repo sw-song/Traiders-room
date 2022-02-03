@@ -3,6 +3,7 @@ import WebSocket from "ws";
 import http from "http";
 import { handle } from "express/lib/application";
 import { SocketAddress } from "net";
+import SocketIO from "socket.io";
 
 const app = express();
 
@@ -17,11 +18,18 @@ app.get("/*", (req, res) => res.redirect("/"));
 const handleListen = () => console.log('listening on http://localhost:3000');
 
 const server = http.createServer(app);
-const wss = new WebSocket.Server({ server });
+const io = SocketIO(server);
 
+io.on("connection", socket => {
+    socket.on("enter_room", (msg, throwing) => {
+        console.log(msg);
+        setTimeout(() => {throwing("hello")}, 2000);
+    });
+})
+
+/*
 const sockets = [];
 
-/* connection to browser */
 wss.on("connection", (socket) => {
     sockets.push(socket);
     socket["nickname"] = "anonymous";
@@ -41,6 +49,6 @@ wss.on("connection", (socket) => {
         }
     });
 })
-
+*/
 
 server.listen(3000, handleListen);
