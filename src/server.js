@@ -21,10 +21,18 @@ const server = http.createServer(app);
 const io = SocketIO(server);
 
 io.on("connection", socket => {
-    socket.on("enter_room", (msg, throwing) => {
-        console.log(msg);
-        setTimeout(() => {throwing("hello")}, 2000);
-    });
+    socket.on("enter_room", (roomName, showRoom) => {
+        socket.join(roomName);
+        showRoom();
+        socket.to(roomName).emit("joined");
+    })
+    socket.on("disconnecting", () => {
+        socket.rooms.forEach((room) => socket.to(room).emit("out"));
+    })
+    socket.on("new_message", (msg, roomName, myMessage) => {
+        socket.to(roomName).emit("new_message", msg);
+        myMessage();
+    })
 })
 
 /*
