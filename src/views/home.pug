@@ -17,8 +17,11 @@ html(lang="en")
             div#room
                 h3
                 ul 
-                form
-                    input(placeholeder="message", requried, type="text")
+                form#name
+                    input(placeholder="nickname", requried, type="text")
+                    button Save
+                form#msg
+                    input(placeholder="message", requried, type="text")
                     button Send
 
         script(src="/socket.io/socket.io.js")
